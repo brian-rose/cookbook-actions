@@ -58,6 +58,11 @@ on:
         required: false
         default: '/${{ github.event.repository.name }}'
         type: string
+      timeout_minutes:
+        description: 'The maximum allowable run time.'
+        required: false
+        default: 30
+        type: number
 
     secrets:
       PRIVATE_KEY:
@@ -92,7 +97,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: inputs.timeout_minutes
     defaults:
       run:
         shell: bash -leo pipefail {0}
